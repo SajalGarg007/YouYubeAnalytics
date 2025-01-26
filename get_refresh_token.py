@@ -10,7 +10,7 @@ load_dotenv()
 
 CLIENT_SECRET = os.getenv("CLIENT_SECRET_REFRESHER")
 SCOPE = 'https://www.googleapis.com/auth/youtube.readonly'
-STORAGE = Storage('credentials.storage')
+STORAGE = Storage('credentials.json')
 print("SCOPE")  
 print(SCOPE)
 print("STORAGE" ) 
