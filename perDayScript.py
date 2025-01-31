@@ -22,7 +22,7 @@ print(current_date)
 token_uri = "https://oauth2.googleapis.com/token"
 start_date = (datetime.now() - timedelta(days=3)).strftime('%Y-%m-%d')
 print(start_date)
-CLIENT_SECRETS_FILE = os.getenv("CLIENT_SECRETS_FILE")
+# CLIENT_SECRETS_FILE = os.getenv("CLIENT_SECRETS_FILE")
 
 client_id = os.getenv("REPLACE_WITH_YOUR_CLIENT_ID")
 client_secret = os.getenv("REPLACE_WITH_YOUR_CLIENT_SECRET")
@@ -127,56 +127,6 @@ def main():
     youtubeAnalytics = get_service()
     zero_views_added = {}
 
-    # for channel_id in channel_ids:
-    #     print(f"Processing channel: {channel_id}")
-
-    #     # Get video IDs, titles, and publish dates for the current channel
-    #     video_id_list, video_title_list, video_publish_dates = get_all_video_in_channel(channel_id)
-
-    #     for i, video_id in enumerate(video_id_list):
-    #         publish_date = video_publish_dates[i]  # Retrieve the publish date for the video
-
-    #         request = execute_api_request(
-    #             youtubeAnalytics.reports().query,
-    #             ids='channel==MINE',
-    #             startDate=start_date,
-    #             endDate=current_date,
-    #             metrics='estimatedMinutesWatched,views,likes,subscribersGained,subscribersLost,averageViewDuration,shares,dislikes',
-    #             dimensions='day',
-    #             sort='day',
-    #             filters=f'video=={video_id}'
-    #         )
-
-    #         rows = request.get('rows', [])
-    #         for row in rows:
-    #             # Check if the date is before the video's publish date
-    #             row_date = row[0]  # Assuming the date is the first element in each row
-    #             if datetime.strptime(row_date, '%Y-%m-%d') < datetime.strptime(publish_date, '%Y-%m-%d'):
-    #                 continue  # Skip rows with dates earlier than the video's publish date
-
-    #             # if row[6] == 0:  # Check if views are zero
-    #             #     # Check if the first zero-views row for this video has already been added
-    #             #     if zero_views_added.get(video_id, False):
-    #             #         continue  # Skip subsequent rows with zero views
-    #             #     zero_views_added[video_id] = True  # Mark the first zero-views row as added
-    #             if row[6] == 0:  
-    #                 continue 
-
-    #             all_data.append([
-    #                 video_id,
-    #                 video_title_list[i],
-    #                 row[0],                      # date
-    #                 row[1],                      # estimated_minutes_watched
-    #                 row[2],                      # views
-    #                 row[3],                      # likes
-    #                 row[4],                      # subscribers_gained
-    #                 row[5],                      # subscribers_lost
-    #                 row[6],                      # average_view_duration
-    #                 row[7],                      # shares
-    #                 row[8],                      # dislikes
-    #                 channel_id,                  # Use channel ID as category
-    #                 "Daily"                      # Add aggregation level as "Daily"
-    #             ])
     for channel_id in channel_ids:
         try:
             print(f"Processing channel: {channel_id}")
@@ -205,11 +155,6 @@ def main():
                     if datetime.strptime(row_date, '%Y-%m-%d') < datetime.strptime(publish_date, '%Y-%m-%d'):
                         continue  # Skip rows with dates earlier than the video's publish date
 
-                    # if row[6] == 0:  # Check if views are zero
-                    #     # Check if the first zero-views row for this video has already been added
-                    #     if zero_views_added.get(video_id, False):
-                    #         continue  # Skip subsequent rows with zero views
-                    #     zero_views_added[video_id] = True  # Mark the first zero-views row as added
                     if row[6] == 0:  
                         continue 
 

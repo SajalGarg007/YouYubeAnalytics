@@ -14,6 +14,7 @@ os.environ['AWS_DEFAULT_REGION'] = os.getenv('AWS_DEFAULT_REGION')
     
 # Connect to S3
 s3 = boto3.client('s3')
+# s3.download_file('you-tube-scraping', 'youtube_analytics.csv', 'C:/Users/sajal garg/Desktop/YouTubeScraping/youtube_analytics/S3file.csv')
 s3.download_file('you-tube-scraping', 'youtube_analytics.csv', 'C:/Users/sajal garg/Desktop/YouTubeScraping/youtube_analytics/S3file.csv')
 
 # # Database connection

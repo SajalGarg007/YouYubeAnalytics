@@ -192,7 +192,7 @@ def main():
         csv_file = "youtube_analytics.csv"
         df.to_csv(csv_file, index=False)
 
-        # # Initialize S3 client
+        # Initialize S3 client
         s3 = boto3.client('s3', region_name='eu-north-1')
 
         # Upload the file to S3
